@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import User from "../models/User.js";
 import { hash, compare } from "bcrypt";
+import { createToken } from "../utils/tokenManager.js";
+import { COOKIE_NAME_AUTH } from "../utils/constants.js";
 
 const getAllUsers = async (req: Request, res: Response) => {
   User.find()
@@ -27,6 +29,27 @@ const userSignUp = async (req: Request, res: Response) => {
     const user = new User({ name, email, password: hashedPassword });
     await user.save();
 
+    //clears the cookie if the user logs in again
+    //options specify that the exact cookie is being cleared
+    res.clearCookie(COOKIE_NAME_AUTH, {
+      path: "/",
+      domain: "localhost",
+      httpOnly: true,
+      signed: true
+    });
+
+    //create a JWT token for the user that lasts 7 days
+    const token = createToken(user._id.toString(), user.email, "7d");
+    const expires = new Date();
+    expires.setDate(expires.getDate() + 7); //a new date a week from now
+    res.cookie(COOKIE_NAME_AUTH, token, {
+      path: "/", //accessible on all paths
+      domain: "localhost",  //domain
+      expires,
+      httpOnly: true, //only accessible via http requests (and not through cliend-side scripts)
+      signed: true
+    });
+
     return res.status(201).json({ message: "OK", name: user.name, email: user.email });
 
   } catch(error) {
@@ -45,6 +68,27 @@ const userLogIn = async (req: Request, res: Response) => {
 
     const correctPassword = await compare(password, user.password);
     if (!correctPassword) return res.status(403).send("Incorrect password or email");
+
+    //clears the cookie if the user logs in again
+    //options specify that the exact cookie is being cleared
+    res.clearCookie(COOKIE_NAME_AUTH, {
+      path: "/",
+      domain: "localhost",
+      httpOnly: true,
+      signed: true
+    });
+
+    //create a JWT token for the user that lasts 7 days
+    const token = createToken(user._id.toString(), user.email, "7d");
+    const expires = new Date();
+    expires.setDate(expires.getDate() + 7); //a new date a week from now
+    res.cookie(COOKIE_NAME_AUTH, token, {
+      path: "/", //accessible on all paths
+      domain: "localhost",  //domain
+      expires,
+      httpOnly: true, //only accessible via http requests (and not through cliend-side scripts)
+      signed: true
+    });
 
     return res.status(200).json({ message: "OK", name: user.name, email: user.email });
 
