@@ -1,12 +1,13 @@
-import React from "react";
 import { AppBar, Toolbar } from "@mui/material";
-import useStyles from "../styles/styles";
+import { headerStyles } from "../styles/styles";
+import Logo from "./common/Logo";
 
 const Header = () => {
-  const classes = useStyles();
   return (
-    <AppBar className={classes.appbar}>
-      <Toolbar className={classes.toolbar}></Toolbar>
+    <AppBar sx={headerStyles.appbar}>
+      <Toolbar sx={headerStyles.toolbar}>
+        <Logo />
+      </Toolbar>
     </AppBar>
   )
 };
