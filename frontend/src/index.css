@@ -12,3 +12,14 @@ body {
 .image-inverted {
   filter: invert(100%);
 }
+
+.nav-link {
+  font-weight: 600;/* makes text bolder*/
+  text-transform: uppercase;
+  margin-right: 10px; /* 10px empty on right */
+  margin-left: 10px;  /* 10px empty on left*/
+  padding: 8px 20px;  /* vertical and horizontal padding, empty space inside the element*/
+  border-radius: 10px;  /* Rounds corners */
+  text-decoration: none;  /* Removes default text underline*/
+  letter-spacing: 1px;  /* Increases letter spacing by 1px*/
+}

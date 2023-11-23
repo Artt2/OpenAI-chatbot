@@ -1,4 +1,4 @@
-const headerStyles = {
+export const headerStyles = {
   appbar: {
     //backgroundColor: "transparent",
     position: "static", //position is static, not affected by scrolling
@@ -9,13 +9,4 @@ const headerStyles = {
   }
 };
 
-const logoStyles = {
-  div : {
-    display: "flex",
-    marginRight: "auto",
-    alignItems: "center",
-    gap: "8px",
-  }
-}
-
-export { headerStyles, logoStyles };
+//TODO: move these to Header.tsx or index.css

@@ -1,18 +1,6 @@
-import { createContext, useState } from "react";
-
-type User = {
-  name: string;
-  email: string;
-};
-
-type UserAuth = {
-  isLoggedIn: boolean;
-  user: User | null;
-  //functions that take params, which dont return values but Promise objects that will be resolved
-  login: (email: string, password: string) => Promise<void>;
-  signup: (name: string, email: string, password: string) => Promise<void>;
-  logout: () => Promise<void>
-}
+import { createContext, useState, useEffect } from "react";
+import { ReactNode } from "react";
+import { User, UserAuth } from "../types";
 
 //createContext returns an object holding Provider and Consumer
 const AuthContext = createContext<UserAuth | null>(null);
