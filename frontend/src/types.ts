@@ -19,3 +19,9 @@ export type NavigationLinkProps = {
   textColor: string;
   onClick?: () => Promise<void>
 };
+
+export type FormInputProps = {
+  name: string;
+  type: string;
+  label: string;
+};
