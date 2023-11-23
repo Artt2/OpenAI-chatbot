@@ -1,15 +1,23 @@
-import { TextField } from "@mui/material";
+import { TextField, TextFieldProps } from "@mui/material";
 import { FormInputProps } from "../../types";
 
-const FormInput = (props: FormInputProps) => {
+//FormInputProps requiredm other props can be added as well
+const FormInput = (props: FormInputProps & TextFieldProps) => {
+  const { name, label, type, ...otherProps } = props;
   return (
     <TextField
       margin="normal"
       required
       fullWidth
-      name={props.name}
-      label={props.label}
-      type={props.type}
+      name={name}
+      label={label}
+      type={type}
+      {...otherProps}
+      InputProps={{
+        style: {
+          color: "white"
+        }
+      }}
     />
   );
 };
