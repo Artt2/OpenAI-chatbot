@@ -5,6 +5,8 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 
+import { toast } from "react-hot-toast";
+
 const Login = () => {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
@@ -13,11 +15,18 @@ const Login = () => {
     event.preventDefault();
     console.log(event);
     const formData = new FormData(event.currentTarget);
-    const email = formData.get("email");
-    const password = formData.get("password");
-    
-    //TODO: handle login here
+    const email = formData.get("email") as string;  //read values as string, even null values
+    const password = formData.get("password") as string;
 
+    toast.loading("Logging In", { id: "login" });
+    auth?.login(email, password)
+      .then(() => {
+        toast.success("Logged In Successfully", { id: "login" });
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Logging In Failed", { id: "login" });
+      });
   };
 
   useEffect(() => {
