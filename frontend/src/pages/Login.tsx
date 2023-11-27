@@ -33,7 +33,7 @@ const Login = () => {
     if (auth?.user) {
       return navigate("/chat");
     }
-  }, [auth]);
+  }, [auth]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Grid container alignItems="center" justifyContent="space-evenly">
