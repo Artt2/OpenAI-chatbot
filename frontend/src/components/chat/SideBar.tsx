@@ -4,7 +4,6 @@ import { CustomTypography } from './CustomTypography';
 import { CHAT_SIDERBAR_MESSAGES } from '../../utils/texts';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
-import red from "@mui/material/colors/red";
 
 /*
   SideBar containing Avatar, introduction text and "clear text" button.
@@ -21,10 +20,10 @@ const SideBar = () => {
     <Box  //sidebar
       sx={{
         display: { xs: "none", sm: "none", md: "flex" },  //not visible on smaller screens
-        flex: 0.22, //takes 20% of space on the left
+        flex: 0.25, //takes 20% of space on the left
         flexDirection: "column",
         width: "100%",
-        height: "100%", //takes 84.5% of viewport height
+        height: "80vh", //takes 84.5% of viewport height
         bgcolor: "rgb(17,29,39)",
         borderRadius: 5,
         margin: 3,
@@ -69,7 +68,7 @@ const SideBar = () => {
           fontWeight: "700",
           borderRadius: 3,
           bgcolor: "#ba000d",
-          marginTop: 20,
+          marginTop: "auto",  //auto for fill all above space with empty
           ":hover": {
             bgcolor: "white",
             color: "black",

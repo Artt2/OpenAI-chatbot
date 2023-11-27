@@ -25,3 +25,5 @@ export type FormInputProps = {
   type: string;
   label: string;
 };
+
+export type ChatRole = "user" | "assistant";
