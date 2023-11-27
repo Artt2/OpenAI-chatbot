@@ -1,5 +1,4 @@
 import { AppBar, Toolbar } from "@mui/material";
-import { headerStyles } from "../styles/styles";
 import Logo from "./common/Logo";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
@@ -9,8 +8,11 @@ const Header = () => {
   const auth = useContext(AuthContext);
 
   return (
-    <AppBar sx={headerStyles.appbar}>
-      <Toolbar sx={headerStyles.toolbar}>
+    <AppBar sx={{
+      position: "static",
+      boxShadow: "none",
+    }}>
+      <Toolbar sx={{display: "flex"}}>
         <Logo />
         <div>
           {auth?.isLoggedIn ? (

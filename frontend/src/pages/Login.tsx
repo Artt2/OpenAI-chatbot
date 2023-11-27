@@ -39,7 +39,7 @@ const Login = () => {
     <Grid container alignItems="center" justifyContent="space-evenly">
       <Grid item 
         alignItems="center"
-        display={{xs: "none", sm: "none", md: "flex"}} md={7}
+        display={{ xs: "none", sm: "none", md: "flex" }} md={7}
         padding={8}
       >
         <img 
