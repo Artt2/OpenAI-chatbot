@@ -1,15 +1,16 @@
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
 import { ChatRole } from "../../types";
+import AssistantAnswer from "./AssistantAnswer";
+import UserAnswer from "./UserAnswer";
+import { extractBlocks } from "../../utils/helpers";
 
-const ChatItem = (
-    { content, role } : { content: string, role: ChatRole }
-  ) => {
-  const auth = useContext(AuthContext);
+const ChatItem = ({ content, role } : { content: string, role: ChatRole }) => {
+  const messageBlocks = extractBlocks(content) as string[];
 
-  return (
-    <div>{role}: {content}</div>
-  )
+  return role == "assistant" ? (
+    <AssistantAnswer messageBlocks={messageBlocks} />
+  ) : (
+    <UserAnswer messageBlocks={messageBlocks} />
+  );
 };
 
 export default ChatItem;

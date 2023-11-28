@@ -23,10 +23,10 @@ const SideBar = () => {
         flex: 0.25, //takes 20% of space on the left
         flexDirection: "column",
         width: "100%",
-        height: "80vh", //takes 84.5% of viewport height
+        height: "78vh", //takes % of viewport height
         bgcolor: "rgb(17,29,39)",
         borderRadius: 5,
-        margin: 3,
+        margin: 2,
         padding: 3
       }}
     >
