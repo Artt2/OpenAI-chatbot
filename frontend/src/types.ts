@@ -29,3 +29,8 @@ export type FormInputProps = {
 export type ChatRole = "user" | "assistant";
 
 export type MessageBlocksType = string[];
+
+export type Message = {
+  role: ChatRole;
+  content: string;
+}

@@ -1,10 +1,11 @@
 import { Box, IconButton, TextareaAutosize } from "@mui/material";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import ChatItem from "./ChatItem";
-import { ChatRole } from "../../types";
+import { ChatRole, Message } from "../../types";
 import { IoIosSend } from "react-icons/io";
+import { sendChatRequest } from "../../services/authService";
 
-const chatMessages = [
+const chatMessages0: Message[] = [
   { role: 'user', content: 'Hello!' },
   { role: 'assistant', content: 'Hi there! How can I help you today?' },
   { role: 'user', content: 'Give me some example JavaScript code.' },
@@ -26,9 +27,21 @@ const chatMessages = [
 const ChatWindow = () => {
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const handleSubmit = () => {
-    const content = inputRef.current?.value as string;
-    console.log(content);
+  const [chatMessages, setChatMessages] = useState<Message[]>([]); //(chatMessages0)
+
+  const handleSubmit = async () => {
+    const content = inputRef.current?.value as string;  //get user input
+    
+    if (inputRef && inputRef.current) {
+      inputRef.current.value = "";  //clear the input field
+    }
+
+    const newMessage: Message = { role: "user", content };
+    setChatMessages((prev) => [...prev, newMessage]); //new message added
+
+    const chatData = await sendChatRequest(content);
+
+    setChatMessages([...chatData.chats])
   };
 
   return (
@@ -38,7 +51,8 @@ const ChatWindow = () => {
         flex: { md: 0.75, xs: 1, sm: 1},
         flexDirection: "column",
         //paddingX: 3,
-        marginRight: 2
+        marginRight: 2,
+        marginLeft: 2,
       }}
     >
       <Box  //box for ChatItems
@@ -88,7 +102,7 @@ const ChatWindow = () => {
             resize: 'none', // Disable resizing
             border: 'none',
             outline: 'none',
-            marginLeft: 5,  //text doesnt start at the far left
+            marginLeft: 10,  //text doesnt start at the far left
             marginTop: "auto",  //these center the text vertically
             marginBottom: "auto",
           }}
@@ -98,7 +112,8 @@ const ChatWindow = () => {
           sx={{ 
             color: "black", 
             fontSize: 30,
-            width: "10%"
+            width: "8%",
+            borderRadius: "4px",
           }}>
           <IoIosSend />
         </IconButton>
