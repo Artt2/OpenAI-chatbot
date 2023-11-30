@@ -14,6 +14,7 @@ const SideBar = () => {
 
   const handleDeleteChats = async () => {
     console.log("Delete chats here");
+    //CONTINUE HERE!! video: 4:58:20
   };
 
   return (

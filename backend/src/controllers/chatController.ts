@@ -45,7 +45,7 @@ export const sendChatsToUser = async (req: Request, res: Response) => {
     const id = res.locals.jwtData.id;
     //id is set as paylaod in tokenManager/createToken
     const user = await User.findById(id);
-
+    
     //if user doesnt exist
     //or if user's id didnt match jwtData.id
     if (!user) {

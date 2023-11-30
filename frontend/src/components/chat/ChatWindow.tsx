@@ -1,9 +1,11 @@
 import { Box, IconButton, TextareaAutosize } from "@mui/material";
-import { useRef, useState } from "react";
+import { useContext, useLayoutEffect, useRef, useState } from "react";
 import ChatItem from "./ChatItem";
 import { ChatRole, Message } from "../../types";
 import { IoIosSend } from "react-icons/io";
-import { sendChatRequest } from "../../services/authService";
+import { getUserChats, sendChatRequest } from "../../services/authService";
+import { AuthContext } from "../../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 const chatMessages0: Message[] = [
   { role: 'user', content: 'Hello!' },
@@ -25,6 +27,7 @@ const chatMessages0: Message[] = [
 ];
 
 const ChatWindow = () => {
+  const auth = useContext(AuthContext);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
   const [chatMessages, setChatMessages] = useState<Message[]>([]); //(chatMessages0)
@@ -43,6 +46,22 @@ const ChatWindow = () => {
 
     setChatMessages([...chatData.chats])
   };
+
+  //runs before loading UI
+  useLayoutEffect(() => {
+    if (auth?.isLoggedIn && auth.user) {
+      toast.loading("Loading Chats", { id: "loadchats" });
+      getUserChats()
+        .then((data) => {
+          setChatMessages([...data.chats]);
+          toast.success("Successfully loaded chats", { id: "loadchats" });
+        })
+        .catch(error => {
+          console.log(error);
+          toast.error("Loading Failed", { id: "loadchats" });
+        });
+    }
+  }, [auth]);
 
   return (
     <Box
