@@ -47,7 +47,7 @@ const ChatWindow = () => {
           display: "flex",
           flexDirection: "column",
           width: "100%",
-          height: "78vh",
+          height: "76vh",
           borderRadius: 3,
           mx: "auto",
           overflow: "scroll", //if content overflows, makes it scrollable
@@ -67,14 +67,18 @@ const ChatWindow = () => {
           width: "100%",
           borderRadius: 8,
           backgroundColor: "white",
-          margin: "auto",
+          //margin: "auto",
+          //marginTop: 5,
+          marginTop: "auto",
+          marginBottom: "auto",
         }}
       >
         {" "}
         <TextareaAutosize
+          className="custom-scrollbar"
           ref={inputRef}
           minRows={1}
-          maxRows={4}
+          maxRows={3}
           style={{
             flex: 1,
             backgroundColor: 'transparent',
@@ -84,8 +88,8 @@ const ChatWindow = () => {
             resize: 'none', // Disable resizing
             border: 'none',
             outline: 'none',
-            marginLeft: 5,
-            marginTop: "auto",
+            marginLeft: 5,  //text doesnt start at the far left
+            marginTop: "auto",  //these center the text vertically
             marginBottom: "auto",
           }}
         />
