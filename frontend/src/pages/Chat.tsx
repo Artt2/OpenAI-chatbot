@@ -1,12 +1,8 @@
 import { Box } from "@mui/material";
-import { useContext } from "react";
-import { AuthContext } from "../contexts/AuthContext";
 import SideBar from "../components/chat/SideBar";
 import ChatWindow from "../components/chat/ChatWindow";
 
 const Chat = () => {
-  const auth = useContext(AuthContext);
-
   return (
     <Box  //outermost flex container
       sx={{

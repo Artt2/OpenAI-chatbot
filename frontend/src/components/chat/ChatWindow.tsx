@@ -1,4 +1,5 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, TextareaAutosize } from "@mui/material";
+import { useRef } from "react";
 import ChatItem from "./ChatItem";
 import { ChatRole } from "../../types";
 import { IoIosSend } from "react-icons/io";
@@ -23,9 +24,11 @@ const chatMessages = [
 ];
 
 const ChatWindow = () => {
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
   const handleSubmit = () => {
-    console.log("Sending new message");
+    const content = inputRef.current?.value as string;
+    console.log(content);
   };
 
   return (
@@ -35,27 +38,16 @@ const ChatWindow = () => {
         flex: { md: 0.75, xs: 1, sm: 1},
         flexDirection: "column",
         //paddingX: 3,
-        mx: 2
+        marginRight: 2
       }}
     >
-      <Typography
-        sx={{
-          display: { xs: "none", sm: "none", md: "flex"}, //only visible on large screens
-          fontSize: "34px",
-          fontWeight: "600",
-          color: "white",
-          //marginBottom: 2,
-        }}
-      >
-        Model - GPT 3.5 Turbo
-      </Typography>
       <Box  //box for ChatItems
         className="custom-scrollbar" //use a custom scrollbar
         sx={{
           display: "flex",
           flexDirection: "column",
           width: "100%",
-          height: "65vh",
+          height: "78vh",
           borderRadius: 3,
           mx: "auto",
           overflow: "scroll", //if content overflows, makes it scrollable
@@ -69,17 +61,44 @@ const ChatWindow = () => {
           <ChatItem content={chat.content} role={chat.role as ChatRole} key={index} />
         ))}
       </Box>
-      <Box>
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          borderRadius: 8,
+          backgroundColor: "white",
+          margin: "auto",
+        }}
+      >
+        {" "}
+        <TextareaAutosize
+          ref={inputRef}
+          minRows={1}
+          maxRows={4}
+          style={{
+            flex: 1,
+            backgroundColor: 'transparent',
+            fontSize: '16px',
+            fontFamily: 'Roboto Slab',
+            fontWeight: 500,
+            resize: 'none', // Disable resizing
+            border: 'none',
+            outline: 'none',
+            marginLeft: 5,
+            marginTop: "auto",
+            marginBottom: "auto",
+          }}
+        />
         <IconButton 
           onClick={handleSubmit} 
           sx={{ 
-            color: "white", 
-            //mx: 1, 
-            fontSize: 32,
+            color: "black", 
+            fontSize: 30,
+            width: "10%"
           }}>
           <IoIosSend />
         </IconButton>
-      </Box>
+      </div>
 
     </Box>
   );

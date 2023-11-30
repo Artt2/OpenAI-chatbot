@@ -26,7 +26,7 @@ const SideBar = () => {
         height: "78vh", //takes % of viewport height
         bgcolor: "rgb(17,29,39)",
         borderRadius: 5,
-        margin: 2,
+        margin: 1,
         padding: 3
       }}
     >

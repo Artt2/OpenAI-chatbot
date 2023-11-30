@@ -29,7 +29,7 @@ const UserAnswer = ({ messageBlocks } : { messageBlocks: MessageBlocksType}) => 
       </Avatar>
       <Box>
         {messageBlocks.map((block, index) => 
-          <Typography sx={{ fontSize: "18px" }} key={index}>{block}</Typography>
+          <Typography sx={{ fontSize: "16px" }} key={index}>{block}</Typography>
         )}
       </Box>
     </Box>

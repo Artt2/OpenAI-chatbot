@@ -35,7 +35,7 @@ const AssistantAnswer = ({ messageBlocks } : { messageBlocks: MessageBlocksType}
               {block}
             </Prism>
           ) : (
-            <Typography sx={{ fontSize: "18px" }} key={index}>{block}</Typography>
+            <Typography sx={{ fontSize: "16px" }} key={index}>{block}</Typography>
           )
         )}
       </Box>
