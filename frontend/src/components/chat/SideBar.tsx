@@ -18,14 +18,21 @@ const SideBar = () => {
   const { setChatMessages } = useContext(ChatContext) as ChatContextType;
 
   const handleDeleteChats = async () => {
-    try {
-      toast.loading("Deleting Chats", { id: "deletechats" });
-      await deleteUserChats();
-      setChatMessages([]);
-      toast.success("Deleted Chats Successfully", { id: "deletechats" });
-    } catch (error) {
-      console.log(error);
-      toast.error("Deleting chats failed", { id: "deletechats" });
+    const confirmDelete = window.confirm("Are you sure you want to delete all chat messages?");
+    
+    if (confirmDelete) {
+      try {
+        toast.loading("Deleting Chats", { id: "deletechats" });
+        await deleteUserChats();
+        setChatMessages([]);
+        toast.success("Deleted Chats Successfully", { id: "deletechats" });
+        
+      } catch (error) {
+        console.log(error);
+        toast.error("Deleting chats failed", { id: "deletechats" });
+      }
+    } else {
+      toast.error("Deleteion Cancelled", { id: "deletechats" });
     }
   };
 
