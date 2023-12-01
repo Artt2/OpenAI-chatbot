@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { ReactNode } from "react";
 import { User, UserAuth } from "../types";
-import { checkAuthStatus, loginUser } from "../services/authService";
+import { checkAuthStatus, logOutUser, loginUser } from "../services/authService";
 
 //createContext returns an object holding Provider and Consumer
 const AuthContext = createContext<UserAuth | null>(null);
@@ -39,7 +39,10 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = async () => {
-
+    await logOutUser(); //log out
+    setIsLoggedIn(false); //user not logged in
+    setUser(null);  //no user
+    window.location.reload(); //reload page
   };
 
   const value = { //contains everything needed to interact with this context

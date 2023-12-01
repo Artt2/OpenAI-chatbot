@@ -4,6 +4,7 @@ import { NavigationLinkProps } from "../../types";
 const NavigationLink = (props: NavigationLinkProps) => {
   return (
     <Link 
+      onClick={props.onClick}
       className="nav-link"
       to={props.to}
       style={{

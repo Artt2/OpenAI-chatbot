@@ -1,8 +1,20 @@
 import { Box } from "@mui/material";
 import SideBar from "../components/chat/SideBar";
 import ChatWindow from "../components/chat/ChatWindow";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Chat = () => {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!auth?.isLoggedIn) {
+      return navigate("/login");
+    }
+  }, [auth]);
+
   return (
     <Box  //outermost flex container
       sx={{

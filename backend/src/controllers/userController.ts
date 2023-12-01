@@ -4,7 +4,7 @@ import { hash, compare } from "bcrypt";
 import { createToken } from "../utils/tokenManager.js";
 import { COOKIE_NAME_AUTH } from "../utils/constants.js";
 
-const getAllUsers = async (req: Request, res: Response) => {
+export const getAllUsers = async (req: Request, res: Response) => {
   User.find()
     .then((users) => {
       res.status(200).json({ users });
@@ -17,7 +17,7 @@ const getAllUsers = async (req: Request, res: Response) => {
 /*
   Data validation is done before in a middleware
 */
-const userSignUp = async (req: Request, res: Response) => {
+export const userSignUp = async (req: Request, res: Response) => {
   try {
     const { name, email, password } = req.body;
 
@@ -58,7 +58,7 @@ const userSignUp = async (req: Request, res: Response) => {
   }
 };
 
-const userLogIn = async (req: Request, res: Response) => {
+export const userLogIn = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -98,7 +98,7 @@ const userLogIn = async (req: Request, res: Response) => {
   }
 };
 
-const verifyUser = async (req: Request, res: Response) => {
+export const verifyUser = async (req: Request, res: Response) => {
   try {
     const id = res.locals.jwtData.id;
     //id is set as paylaod in tokenManager/createToken
@@ -122,4 +122,33 @@ const verifyUser = async (req: Request, res: Response) => {
   }
 };
 
-export { getAllUsers, userSignUp, userLogIn, verifyUser };
+export const userLogout = async (req: Request, res: Response) => {
+  try {
+    const id = res.locals.jwtData.id;
+
+    const user = await User.findById(id);
+
+    //if user doesnt exist
+    //or if user's id didnt match jwtData.id
+    if (!user) {
+      return res.status(401).send("User not registered OR Token malfunction");
+    } else if (user._id.toString() !== id) {
+      return res.status(401).send("ID from database didn't match with jwtData.id.")
+    }
+
+    //all good, clearCookie
+    res.clearCookie(COOKIE_NAME_AUTH, {
+      httpOnly: true,
+      domain: "localhost",
+      signed: true,
+      path: "/",
+    });
+
+    return res.status(200).json({ message: "OK", name: user.name, email: user.email });
+  
+  } catch(error) {
+    console.log(error);
+    return res.status(200).json({ message: "ERROR", cause: error.message });
+  }
+};
+
