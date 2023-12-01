@@ -62,3 +62,29 @@ export const sendChatsToUser = async (req: Request, res: Response) => {
     return res.status(200).json({ message: "ERROR", cause: error.message });
   }
 };
+
+export const deleteChats = async (req: Request, res: Response) => {
+  try {
+    const id = res.locals.jwtData.id;
+    //id is set as paylaod in tokenManager/createToken
+    const user = await User.findById(id);
+    
+    //if user doesnt exist
+    //or if user's id didnt match jwtData.id
+    if (!user) {
+      return res.status(401).send("User not registered OR Token malfunction");
+    } else if (user._id.toString() !== id) {
+      return res.status(401).send("ID from database didn't match with jwtData.id.")
+    }
+
+    //@ts-ignore
+    user.chats = [];  //clear chats
+    await user.save();  //save to db
+
+    return res.status(200).json({ message: "OK" });
+  
+  } catch(error) {
+    console.log(error);
+    return res.status(200).json({ message: "ERROR", cause: error.message });
+  }
+};

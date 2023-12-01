@@ -1,11 +1,12 @@
 import { Box, IconButton, TextareaAutosize } from "@mui/material";
-import { useContext, useLayoutEffect, useRef, useState } from "react";
+import { useContext, useLayoutEffect, useRef } from "react";
 import ChatItem from "./ChatItem";
-import { ChatRole, Message } from "../../types";
+import { ChatContextType, ChatRole, Message } from "../../types";
 import { IoIosSend } from "react-icons/io";
 import { getUserChats, sendChatRequest } from "../../services/authService";
 import { AuthContext } from "../../contexts/AuthContext";
 import toast from "react-hot-toast";
+import { ChatContext } from "../../contexts/ChatContext";
 
 const chatMessages0: Message[] = [
   { role: 'user', content: 'Hello!' },
@@ -30,7 +31,8 @@ const ChatWindow = () => {
   const auth = useContext(AuthContext);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const [chatMessages, setChatMessages] = useState<Message[]>([]); //(chatMessages0)
+  //const [chatMessages, setChatMessages] = useState<Message[]>([]); //(chatMessages0)
+  const { chatMessages, setChatMessages } = useContext(ChatContext) as ChatContextType;
 
   const handleSubmit = async () => {
     const content = inputRef.current?.value as string;  //get user input

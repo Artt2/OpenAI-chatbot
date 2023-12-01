@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type User = {
   name: string;
   email: string;
@@ -33,4 +35,9 @@ export type MessageBlocksType = string[];
 export type Message = {
   role: ChatRole;
   content: string;
-}
+};
+
+export type ChatContextType = {
+  chatMessages: Message[];
+  setChatMessages: Dispatch<SetStateAction<Message[]>>;
+};

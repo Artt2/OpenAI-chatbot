@@ -4,6 +4,10 @@ import { CustomTypography } from './CustomTypography';
 import { CHAT_SIDERBAR_MESSAGES } from '../../utils/texts';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
+import { deleteUserChats } from '../../services/authService';
+import { ChatContext } from '../../contexts/ChatContext';
+import { ChatContextType } from '../../types';
+import toast from 'react-hot-toast';
 
 /*
   SideBar containing Avatar, introduction text and "clear text" button.
@@ -11,10 +15,18 @@ import { AuthContext } from '../../contexts/AuthContext';
 */
 const SideBar = () => {
   const auth = useContext(AuthContext);
+  const { setChatMessages } = useContext(ChatContext) as ChatContextType;
 
   const handleDeleteChats = async () => {
-    console.log("Delete chats here");
-    //CONTINUE HERE!! video: 4:58:20
+    try {
+      toast.loading("Deleting Chats", { id: "deletechats" });
+      await deleteUserChats();
+      setChatMessages([]);
+      toast.success("Deleted Chats Successfully", { id: "deletechats" });
+    } catch (error) {
+      console.log(error);
+      toast.error("Deleting chats failed", { id: "deletechats" });
+    }
   };
 
   return (
