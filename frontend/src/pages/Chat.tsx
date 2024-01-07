@@ -9,7 +9,7 @@ const Chat = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useEffect(() => { //navigate to login page if user is not logged in
     if (!auth?.isLoggedIn) {
       return navigate("/login");
     }

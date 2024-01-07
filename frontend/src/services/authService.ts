@@ -9,6 +9,15 @@ export const loginUser = async (email: string, password: string) => {
   return data;
 };
 
+export const signupUser = async (name: string, email: string, password: string) => {
+  const res = await axios.post("/user/signup", { name, email, password });
+  if (res.status !== 201) {
+    throw new Error("Unable to sing up");
+  }
+  const data = await res.data;
+  return data;
+};
+
 /*
   Checks if auth cookies have been set.
   If so, returns name and email needed for user needed in AuthContext.

@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { ReactNode } from "react";
 import { User, UserAuth } from "../types";
-import { checkAuthStatus, logOutUser, loginUser } from "../services/authService";
+import { checkAuthStatus, logOutUser, loginUser, signupUser } from "../services/authService";
 
 //createContext returns an object holding Provider and Consumer
 const AuthContext = createContext<UserAuth | null>(null);
@@ -35,7 +35,12 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const signup = async(name: string, email: string, password: string) => {
+    const data = await signupUser(name, email, password);
 
+    if (data) {
+      setUser({ email: data.email, name: data.name });
+      setIsLoggedIn(true);
+    }
   };
 
   const logout = async () => {
