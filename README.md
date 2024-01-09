@@ -62,5 +62,5 @@ Access the chatbot application at [localhost:5173](http://localhost:5173).
 
 Based partly on a tutorial found [here](https://www.youtube.com/watch?v=wrHTcjSZQ1Y).
 
-![demo pic1](https://github.com/Artt2/OpenAI-chatbot/tree/main/frontend/public/demopic1.jpg?raw=true)
-![demo pic2](https://github.com/Artt2/OpenAI-chatbot/tree/main/frontend/public/demopic2.jpg?raw=true)
+![demo pic1](https://github.com/Artt2/OpenAI-chatbot/tree/main/frontend/public/demopic1.jpg)
+![demo pic2](https://github.com/Artt2/OpenAI-chatbot/tree/main/frontend/public/demopic2.jpg)
