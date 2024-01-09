@@ -65,6 +65,13 @@ const ChatWindow = () => {
     }
   }, [auth]);
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault(); // Prevents adding a new line
+      handleSubmit(); // Calls the function to send the message
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -114,6 +121,7 @@ const ChatWindow = () => {
           ref={inputRef}
           minRows={1}
           maxRows={3}
+          onKeyDown={(e) => handleKeyPress(e)}
           style={{
             flex: 1,
             backgroundColor: 'transparent',
