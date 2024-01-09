@@ -1,5 +1,5 @@
 import { Box, IconButton, TextareaAutosize } from "@mui/material";
-import { useContext, useLayoutEffect, useRef } from "react";
+import { useContext, useLayoutEffect, useRef, useState } from "react";
 import ChatItem from "./ChatItem";
 import { ChatContextType, ChatRole, Message } from "../../types";
 import { IoIosSend } from "react-icons/io";
@@ -14,7 +14,8 @@ const chatMessages0: Message[] = [
   { role: 'user', content: 'Give me some example JavaScript code.' },
   {
     role: 'assistant',
-    content: 'Sure, I\'ll do my best to assist you.```javascript\nconst test = () => {\n  return "testing";\n};```Is this good enough?',
+    //content: 'Sure, I\'ll do my best to assist you.```javascript\nconst test = () => {\n  return "testing";\n};```Is this good enough?',
+    content: 'Sure, here are a few examples of JavaScript code:\n\n// Hello World\nconsole.log("Hello, World!");\n\n// Variables and Operations\nlet x = 5;\nlet y = 3;\nlet sum = x + y;\nconsole.log("The sum of x and y is: " + sum);\n\n// Conditional Statements\nlet temperature = 25;\nif (temperature > 30) {\n    console.log("It\'s hot outside!");\n} else if (temperature > 20) {\n    console.log("It\'s warm outside.");\n} else {\n    console.log("It\'s cold outside!");\n}\n\n// Loops\nfor (let i = 0; i < 5; i++) {\n    console.log("Count: " + i);\n}\n\n// Functions\nfunction greet(name) {\n    console.log("Hello, " + name + "!");\n}\ngreet("Alice");',
   },
   {
     role: 'user',
@@ -22,7 +23,7 @@ const chatMessages0: Message[] = [
   },
   {
     role: 'assistant',
-    content: 'You\'re welcome!```javascript\n// Here\'s another example\nconst greeting = () => {\n  return "Hello, World!";\n};```Feel free to ask if you need more help!',
+    content: "You're welcome! If you have any more questions or need further assistance, feel free to ask. Happy coding!",
   },
   // Add more messages as needed
 ];
@@ -31,8 +32,8 @@ const ChatWindow = () => {
   const auth = useContext(AuthContext);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
-  //const [chatMessages, setChatMessages] = useState<Message[]>([]); //(chatMessages0)
-  const { chatMessages, setChatMessages } = useContext(ChatContext) as ChatContextType;
+  const [chatMessages, setChatMessages] = useState<Message[]>([]); //(chatMessages0)
+  //const { chatMessages, setChatMessages } = useContext(ChatContext) as ChatContextType;
 
   const handleSubmit = async () => {
     const content = inputRef.current?.value as string;  //get user input
@@ -55,7 +56,8 @@ const ChatWindow = () => {
       toast.loading("Loading Chats", { id: "loadchats" });
       getUserChats()
         .then((data) => {
-          setChatMessages([...data.chats]);
+          //setChatMessages([...data.chats]);
+          setChatMessages(chatMessages0); //DELETE THIS AND UNCOMMENT THE ONE ABOVE
           toast.success("Successfully loaded chats", { id: "loadchats" });
         })
         .catch(error => {
