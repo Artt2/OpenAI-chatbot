@@ -55,6 +55,9 @@ An AI chatbot web application developed with the MERN stack: **MongoDB**, **Expr
 After installation, start the application with 'npm start'.
 Access the chatbot application at [localhost:5173](http://localhost:5173).
 
+## Demo video
+[![demo video](https://img.youtube.com/vi/oxvraVbuVjw/0.jpg)](https://www.youtube.com/watch?v=oxvraVbuVjw)
+
 ## Sources
 
 Based partly on a tutorial found [here](https://www.youtube.com/watch?v=wrHTcjSZQ1Y).

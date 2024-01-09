@@ -32,7 +32,7 @@ const SideBar = () => {
         toast.error("Deleting chats failed", { id: "deletechats" });
       }
     } else {
-      toast.error("Deleteion Cancelled", { id: "deletechats" });
+      toast.error("Deletion Cancelled", { id: "deletechats" });
     }
   };
 

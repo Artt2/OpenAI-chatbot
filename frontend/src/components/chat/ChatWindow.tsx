@@ -8,6 +8,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import toast from "react-hot-toast";
 import { ChatContext } from "../../contexts/ChatContext";
 
+//demo messages
 const chatMessages0: Message[] = [
   { role: 'user', content: 'Hello!' },
   { role: 'assistant', content: 'Hi there! How can I help you today?' },
@@ -32,8 +33,8 @@ const ChatWindow = () => {
   const auth = useContext(AuthContext);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const [chatMessages, setChatMessages] = useState<Message[]>([]); //(chatMessages0)
-  //const { chatMessages, setChatMessages } = useContext(ChatContext) as ChatContextType;
+  //const [chatMessages, setChatMessages] = useState<Message[]>([]); // for demomessages
+  const { chatMessages, setChatMessages } = useContext(ChatContext) as ChatContextType;
 
   const handleSubmit = async () => {
     const content = inputRef.current?.value as string;  //get user input
@@ -56,8 +57,8 @@ const ChatWindow = () => {
       toast.loading("Loading Chats", { id: "loadchats" });
       getUserChats()
         .then((data) => {
-          //setChatMessages([...data.chats]);
-          setChatMessages(chatMessages0); //DELETE THIS AND UNCOMMENT THE ONE ABOVE
+          setChatMessages([...data.chats]);
+          //setChatMessages(chatMessages0); //for demo messages
           toast.success("Successfully loaded chats", { id: "loadchats" });
         })
         .catch(error => {
