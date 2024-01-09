@@ -20,7 +20,7 @@ const Header = () => {
               <NavigationLink
                 to="/chat"
                 text="Go To Chat"
-                bg="#66ccff" //"00fffc"
+                bg="#66ccff"
                 textColor="black"
               />
               <NavigationLink
@@ -36,7 +36,7 @@ const Header = () => {
               <NavigationLink 
                 to="/login"
                 text="Log In"
-                bg="#00fffc"
+                bg="#66ccff"
                 textColor="black"
               />
               <NavigationLink 
