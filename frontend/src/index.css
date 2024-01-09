@@ -48,3 +48,16 @@ body {
   outline: 1px solid slategrey;
   border-radius: 10px;
 }
+
+.rotate {
+  animation: rotation 8s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
