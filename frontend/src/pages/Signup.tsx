@@ -63,7 +63,7 @@ const Signup = () => {
         onSubmit={handleSubmit}
       >
         <Typography variant="h4">
-            Log In
+            Sign Up
         </Typography>
         <FormInput
           name="name"
