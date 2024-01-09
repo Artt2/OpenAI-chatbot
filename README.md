@@ -1,6 +1,6 @@
 # OpenAI-chatbot
 
-An AI chatbot web application developed with the MERN stack: **MongoDB**, **Express**, **React** and **Node**, using the [OpenAI API](https://openai.com/blog/openai-api). See all packages and libraries used [here](#Frontend-Packages-and-Libraries).
+An AI chatbot web application developed with the MERN stack: **MongoDB**, **Express**, **React** and **Node**, using the [OpenAI API](https://openai.com/blog/openai-api). See all packages and libraries used [here](#Frontend-Packages-and-Libraries). See [demo video](#demo-video) and [pictures](#pictures).
 
 ## Features
 
